@@ -61,7 +61,7 @@ const App = () => {
                             return {...card, matched:true}
                         }
                         else{
-                            return {...card, matched:false};
+                            return {...card};
                         }
                     })
                 })
