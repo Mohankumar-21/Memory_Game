@@ -90,7 +90,7 @@ const App = () => {
    useEffect(()=>{   
     shuffleCards();
     },[])
-
+    const allCardsMatched = Cards.every(card => card.matched);
     return ( 
         <div className="App">
          <h1>Magic Match</h1>
@@ -107,6 +107,12 @@ const App = () => {
             ))}
          </div>
          <p>Turns : {turns}</p>
+         {allCardsMatched && (
+        <div className="congratulations">
+          <p>Congratulations! You've matched all the cards.</p>
+          <button onClick={shuffleCards}>Play Again</button>
+        </div>
+      )}
         </div>
      );
 }
