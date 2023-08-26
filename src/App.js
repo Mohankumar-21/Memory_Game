@@ -34,6 +34,8 @@ const App = () => {
        setChoiceTwo(null);
        setCards(shuffledcards); 
        setTurns(0);
+       setdisabled(false);
+
     };
    // Handle the choice
     const handleChoice = (card) =>
@@ -49,6 +51,7 @@ const App = () => {
             setdisabled(true);
             if(choiceOne.src === choiceTwo.src)
             {
+                
                 setCards((prevCards)=>
                 {
                     return prevCards.map((card) =>
@@ -58,22 +61,24 @@ const App = () => {
                             return {...card, matched:true}
                         }
                         else{
-                            return card;
+                            return {...card, matched:false};
                         }
                     })
                 })
+
+                resetTurn();
                  
             }else{
                setTimeout(()=>resetTurn(),1000);
             }
         }
+        
          
     },[choiceOne,choiceTwo])
-
-
-     // redet the choices and increase turn
+    // redet the choices and increase turn
 
      const resetTurn = () => {
+     
         setChoiceOne(null);
         setChoiceTwo(null);
         setTurns(prevTurns => prevTurns+1);
@@ -97,7 +102,7 @@ const App = () => {
                card={card}
                 handleChoice = {handleChoice}
                 flipped ={card===choiceOne || card === choiceTwo || card.matched}
-                 disabled={disabled}  > 
+                 disabled={disabled} > 
                </SingleCard>
             ))}
          </div>
